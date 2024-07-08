@@ -3,7 +3,7 @@ async function get_one_trip_json( trip_id ){
         .then( response => response.json() )
         .then( results => parse_json_for_one_trip(results) )
 }
-get_one_trip_json(trip_id)
+// get_one_trip_json(trip_id)
 
 async function parse_json_for_one_trip (results)  {
     let data  = results.this_trip_json

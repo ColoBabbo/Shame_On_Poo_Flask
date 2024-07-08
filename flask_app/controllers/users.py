@@ -50,7 +50,7 @@ def register() -> None:
             session['current_login'] = new_user_id
             session['first_name'] = data['first_name']
             session['logged_in'] = True
-            return redirect(url_for('show_all_trips', user_id = new_user_id))
+            return redirect(url_for('show_all_reports', user_id = new_user_id))
         session['register_attempt'] = request.form
     return redirect('/')
 
@@ -65,7 +65,7 @@ def login() -> None:
         session['current_login'] = this_user.id
         session['first_name'] = this_user.first_name
         session['logged_in'] = True
-        return redirect(url_for('show_all_trips', user_id = this_user.id))
+        return redirect(url_for('show_all_reports', user_id = this_user.id))
     return redirect('/')
 
 @app.get('/user/<int:user_id>')
@@ -89,8 +89,8 @@ def logout() -> None:
         session.pop('user_name')
     if session.get('logged_in'):
         session.pop('logged_in')
-    if session.get('trip_attempt'):
-        session.pop('trip_attempt')
+    if session.get('report_attempt'):
+        session.pop('report_attempt')
     if session.get('edit_attempt'):
         session.pop('edit_attempt')
     if session.get('item_attempt'):
