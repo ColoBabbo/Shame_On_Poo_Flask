@@ -10,7 +10,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 PASS_REGEX = re.compile(r'^(?=.*[A-Z])(?=.*\d).+$')
 
 class User:
-    db = 'trip_lists_flask_db'
+    db = 'shame_on_poo_schema'
 
     def __init__(self, data:dict) -> None:
         self.id = data['id']

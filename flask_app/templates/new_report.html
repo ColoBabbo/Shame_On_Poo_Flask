@@ -7,19 +7,19 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <title>Plan a New Trip</title>
+    <title>File a New Report</title>
 </head>
 <body>
     <div class="container-fluid bg-body-secondary">
         <nav class="navbar mb-3 py-0">
             <div class="container d-flex justify-content-between px-3">
                 <div class="pb-1">
-                    <h1 class="navbar-brand text-danger-emphasis pb-0" >Trip Lists</h1>
+                    <h1 class="navbar-brand text-danger-emphasis pb-0" >Report Lists</h1>
                     <a class="text-decoration-none text-reset" href="/user/{{session['current_login']}}">Welcome {{session.get('first_name')}}!</a>
                 </div>
                 <nav class="nav nav-underline justify-content-end align-items-center" id="navbarNavAltMarkup">
-                    <a class="nav-link" href="{{ url_for('show_all_trips') }}">All Trips</a>
-                    <a href="#" class="nav-link active" aria-current="page" >Add a Trip</a>
+                    <a class="nav-link" href="{{ url_for('show_all_reports') }}">All Reports</a>
+                    <a href="#" class="nav-link active" aria-current="page" >Add a Report</a>
                     <a href="/user/logout" class="btn btn-outline-warning">Logout</a>
                 </nav>
             </div>
@@ -28,21 +28,9 @@
 
     <div class="container py-3 px-3">
         <div class="card">
-            <h2 class="card-header fs-3 border-bottom border-5">Plan a New Trip</h2>
+            <h2 class="card-header fs-3 border-bottom border-5">File a New Report</h2>
             <div class="card-body">
-                <form action="/add_trip" method="POST">
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="name" id="name" value="{{pre_fill['name']}}" placeholder="">
-                        <label class="form-label" for="name">Name:</label>
-                        {% with messages = get_flashed_messages(category_filter=['name']) %}
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                            {% endif %}
-                        {% endwith %}
-                    </div>
-
+                <form action="/add_report" method="POST">
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="location" id="location" value="{{pre_fill['location']}}" placeholder="">
                         <label class="form-label" for="location">Location:</label>
@@ -57,7 +45,7 @@
 
                     <div class="mb-3">
                         <div class="input-group">
-                            <label class="input-group-text py-3" for="date">Trip Date:</label>
+                            <label class="input-group-text py-3" for="date">Date:</label>
                             <input class="form-control" type="date" name="date" id="date" value="{{pre_fill['date']}}" placeholder="">
                         </div>
                         {% with messages = get_flashed_messages(category_filter=['date']) %}
@@ -70,9 +58,33 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="number" name="days" id="days" value="{{pre_fill['days']}}" placeholder="">
-                        <label class="form-label" for="days">Number of Days:</label>
-                        {% with messages = get_flashed_messages(category_filter=['days']) %}
+                        <input class="form-control" type="text" name="description" id="description" value="{{pre_fill['description']}}" placeholder="">
+                        <label class="form-label" for="description">Description:</label>
+                        {% with messages = get_flashed_messages(category_filter=['description']) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="offense" id="offense" value="{{pre_fill['offense']}}" placeholder="">
+                        <label class="form-label" for="offense">Type of Offense:</label>
+                        {% with messages = get_flashed_messages(category_filter=['offense']) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="img_file" id="img_file" value="{{pre_fill['img_file']}}" placeholder="">
+                        <label class="form-label" for="img_file">Link to your Evidence:</label>
+                        {% with messages = get_flashed_messages(category_filter=['img_file']) %}
                             {% if messages %}
                                 {% for message in messages %}
                                     <div class="form-text text-danger ps-3">{{ message }}</div>
@@ -82,7 +94,8 @@
                     </div>
 
                     <input type="hidden" name="user_id" id="user_id" value="{{session['current_login']}}">
-                    <input type="hidden" name="new_trip" id="new_trip" value="{{True}}">
+                    <input type="hidden" name="is_cleaned" id="is_cleaned" value="{{True}}">
+                    {# <input type="hidden" name="new_report" id="new_report" value="{{False}}"> #}
                     <button class="btn btn-outline-primary" type="submit">Add</button>
                 </form>
             </div>

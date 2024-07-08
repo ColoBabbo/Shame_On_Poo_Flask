@@ -1,3 +1,4 @@
+
 #final_victory {
     display: none;
     text-shadow: 0 0 20px #fff;
@@ -8,4 +9,9 @@
     display: none;
     text-shadow: 0 0 20px #fff;
     color: silver;
+}
+
+.img-max {
+    max-width: 500px;
+    width:100%;
 }
