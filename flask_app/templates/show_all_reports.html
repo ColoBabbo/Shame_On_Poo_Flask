@@ -61,7 +61,7 @@
                                     <td class=""><a href="{{url_for('show_one_report', report_id = report.id)}}" class="text-decoration-none text-primary fs-6 fw-bold">{{report.offense}}</a></td>
                                     <td>{{report.location}}</td>
                                     <td>{{report.date.strftime('%B %d, %Y')}}</td>
-                                    <td>{{report.is_cleaned}}</td>
+                                    <td>{{'Yes' if report.is_cleaned else 'No'}}</td>
                                     <td>
                                         {% if report.user_id == session['current_login'] %}
                                             <a href="{{url_for('edit_report', report_id = report.id)}}" class="btn btn-outline-info py-0 px-2">Edit</a>
