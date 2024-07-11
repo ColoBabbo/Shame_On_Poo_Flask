@@ -99,7 +99,7 @@ def add_report() -> None:
                 new_report = report.Report.insert_one(data)
                 if session.get('report_attempt'):
                     session.pop('report_attempt')
-                return redirect(url_for('show_all_reports'))
+                return redirect(url_for('show_one_report', report_id = new_report))
             session['report_attempt'] = request.form
         return redirect('/add_report')
     else:
