@@ -28,11 +28,11 @@
                                     value="{{ pre_fill['first_name'] }}" placeholder="">
                                 <label class="form-label" for="first_name">First Name:</label>
                                 {% with messages = get_flashed_messages(category_filter=['first']) %}
-                                {% if messages %}
-                                {% for message in messages %}
-                                <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                                {% endif %}
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="form-text text-danger ps-3">{{ message }}</div>
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endwith %}
                             </div>
 
@@ -41,11 +41,11 @@
                                     value="{{ pre_fill['last_name'] }}" placeholder="">
                                 <label class="form-label" for="last_name">Last Name:</label>
                                 {% with messages = get_flashed_messages(category_filter=['last']) %}
-                                {% if messages %}
-                                {% for message in messages %}
-                                <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                                {% endif %}
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="form-text text-danger ps-3">{{ message }}</div>
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endwith %}
                             </div>
 
@@ -54,11 +54,11 @@
                                     value="{{ pre_fill['email'] }}" placeholder="">
                                 <label class="form-label" for="email">Email:</label>
                                 {% with messages = get_flashed_messages(category_filter=['email']) %}
-                                {% if messages %}
-                                {% for message in messages %}
-                                <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                                {% endif %}
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="form-text text-danger ps-3">{{ message }}</div>
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endwith %}
                             </div>
                             <div class="form-floating mb-3">
@@ -66,11 +66,11 @@
                                     value="{{ pre_fill['password'] }}" placeholder="">
                                 <label class="form-label" for="password">Password:</label>
                                 {% with messages = get_flashed_messages(category_filter=['pass']) %}
-                                {% if messages %}
-                                {% for message in messages %}
-                                <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                                {% endif %}
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="form-text text-danger ps-3">{{ message }}</div>
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endwith %}
                             </div>
 
@@ -91,15 +91,15 @@
                         <h2>Login</h2>
 
                         {% with messages = get_flashed_messages(category_filter=['login']) %}
-                        {% if messages %}
-                        <div class="card mb-3 bg-danger-subtle">
-                            <div class="card-body pb-0">
-                                {% for message in messages %}
-                                <p class="text-danger">{{ message }}</p>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        {% endif %}
+                            {% if messages %}
+                                <div class="card mb-3 bg-danger-subtle">
+                                    <div class="card-body pb-0">
+                                        {% for message in messages %}
+                                            <p class="text-danger">{{ message }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endwith %}
 
                         <form action="/login" method="post">

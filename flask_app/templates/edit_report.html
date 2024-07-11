@@ -17,9 +17,12 @@
         <nav class="navbar mb-3 py-0">
             <div class="container d-flex justify-content-between px-3">
                 <div class="pb-1">
-                    <h1 class="navbar-brand text-danger-emphasis pb-0">Report Lists</h1>
-                    <a class="text-decoration-none text-reset" href="/user/{{session['current_login']}}">Welcome
-                        {{session.get('first_name')}}!</a>
+                    <h1 class="navbar-brand text-danger-emphasis pb-0">Shame on Poo</h1>
+                    <a class="text-decoration-none text-reset" 
+                        href="/user/{{session['current_login']}}">
+                        Welcome
+                        {{session.get('first_name')}}!
+                    </a>
                 </div>
                 <nav class="nav nav-underline justify-content-end align-items-center" id="navbarNavAltMarkup">
                     <a class="nav-link" href="{{ url_for('show_all_reports') }}">All Reports</a>
@@ -40,11 +43,11 @@
                             value="{{pre_fill['location']}}" placeholder="">
                         <label class="form-label" for="location">Location:</label>
                         {% with messages = get_flashed_messages(category_filter=['location']) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="form-text text-danger ps-3">{{ message }}</div>
-                        {% endfor %}
-                        {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
                         {% endwith %}
                     </div>
 
@@ -55,11 +58,11 @@
                                 placeholder="">
                         </div>
                         {% with messages = get_flashed_messages(category_filter=['date']) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="form-text text-danger ps-3">{{ message }}</div>
-                        {% endfor %}
-                        {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
                         {% endwith %}
                     </div>
 
@@ -68,11 +71,11 @@
                             value="{{pre_fill['description']}}" placeholder="">
                         <label class="form-label" for="description">Description:</label>
                         {% with messages = get_flashed_messages(category_filter=['description']) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="form-text text-danger ps-3">{{ message }}</div>
-                        {% endfor %}
-                        {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
                         {% endwith %}
                     </div>
 
@@ -81,11 +84,11 @@
                             value="{{pre_fill['offense']}}" placeholder="">
                         <label class="form-label" for="offense">Type of Offense:</label>
                         {% with messages = get_flashed_messages(category_filter=['offense']) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="form-text text-danger ps-3">{{ message }}</div>
-                        {% endfor %}
-                        {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
                         {% endwith %}
                     </div>
 
@@ -94,11 +97,11 @@
                             value="{{pre_fill['img_file']}}" placeholder="">
                         <label class="form-label" for="img_file">Link to your Evidence:</label>
                         {% with messages = get_flashed_messages(category_filter=['img_file']) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="form-text text-danger ps-3">{{ message }}</div>
-                        {% endfor %}
-                        {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
                         {% endwith %}
                     </div>
 
@@ -109,11 +112,11 @@
                             <label class="form-label" for="is_cleaned">Has it been Cleaned?</label>
                         </div>
                         {% with messages = get_flashed_messages(category_filter=['is_cleaned']) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="form-text text-danger ps-3">{{ message }}</div>
-                        {% endfor %}
-                        {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="form-text text-danger ps-3">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
                         {% endwith %}
                     </div>
 

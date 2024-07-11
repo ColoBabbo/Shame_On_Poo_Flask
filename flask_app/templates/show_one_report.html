@@ -18,9 +18,12 @@
         <nav class="navbar mb-3 py-0">
             <div class="container d-flex justify-content-between px-3">
                 <div class="pb-1">
-                    <h1 class="navbar-brand text-danger-emphasis pb-0">Report Lists</h1>
-                    <a class="text-decoration-none text-reset" href="/user/{{session['current_login']}}">Welcome
-                        {{session.get('first_name')}}!</a>
+                    <h1 class="navbar-brand text-danger-emphasis pb-0">Shame on Poo</h1>
+                    <a class="text-decoration-none text-reset" 
+                        href="/user/{{session['current_login']}}">
+                        Welcome
+                        {{session.get('first_name')}}!
+                    </a>
                 </div>
                 <nav class="nav nav-underline justify-content-end align-items-center" id="navbarNavAltMarkup">
                     <a class="nav-link" href="{{ url_for('show_all_reports') }}">All Reports</a>
