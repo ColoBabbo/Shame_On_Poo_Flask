@@ -8,7 +8,7 @@ UPLOAD_FOLDER = 'flask_app/static/images'
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 1000 * 1000
+app.config['MAX_CONTENT_LENGTH'] = 4 * 1000 * 1000
 
 
 def allowed_file(filename):
