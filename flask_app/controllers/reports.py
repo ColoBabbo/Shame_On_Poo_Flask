@@ -1,6 +1,19 @@
-from flask import render_template, redirect, request, session, url_for, flash, jsonify
+from flask import render_template, redirect, request, session, url_for, flash, jsonify, send_from_directory
 from flask_app import app
 from flask_app.models import report
+import re, os
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = 'flask_app/static/images'
+ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 4 * 1000 * 1000
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/report/<int:report_id>/json')
 def show_one_report_json(report_id:int):
@@ -40,8 +53,6 @@ def show_one_report(report_id:int):
 def show_all_reports():
     if session.get('logged_in'):
         all_reports = report.Report.get_all()
-        # if session.get('item_attempt'):
-        #     session.pop('item_attempt')
         return render_template('show_all_reports.html', all_reports = all_reports)
     else:
         flash('Please Login', 'login')
@@ -59,7 +70,6 @@ def add_report() -> None:
                     'date': session['report_attempt']['date'],
                     'description': session['report_attempt']['description'],
                     'offense': session['report_attempt']['offense'],
-                    'img_file': session['report_attempt']['img_file'],
                 }
             else:
                 pre_fill = {
@@ -67,15 +77,29 @@ def add_report() -> None:
                     'date': '',
                     'description': '',
                     'offense': '',
-                    'img_file': '',
                 }
             return render_template('new_report.html', pre_fill = pre_fill)
         elif request.method == "POST":
+            if 'img_file' not in request.files:
+                img_filename = report.Report.save_url_to_static_images(request.form)
+            else:
+                img_file = request.files['img_file']
+                if img_file and allowed_file(img_file.filename):
+                    img_filename = secure_filename(img_file.filename)
+                    img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
             if report.Report.is_legit_report(request.form):
-                new_report = report.Report.insert_one(request.form)
+                data = {
+                    'location': request.form['location'],
+                    'date': request.form['date'],
+                    'description': request.form['description'],
+                    'offense': request.form['offense'],
+                    'img_file': img_filename,
+                    'user_id': request.form['user_id'],
+                }
+                new_report = report.Report.insert_one(data)
                 if session.get('report_attempt'):
                     session.pop('report_attempt')
-                return redirect(url_for('show_all_reports'))
+                return redirect(url_for('show_one_report', report_id = new_report))
             session['report_attempt'] = request.form
         return redirect('/add_report')
     else:
