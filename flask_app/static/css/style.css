@@ -1,4 +1,3 @@
-
 #final_victory {
     display: none;
     text-shadow: 0 0 20px #fff;
@@ -11,7 +10,14 @@
     color: silver;
 }
 
+body {
+    background-color: #143658;
+
+
+}
+
 .img-max {
-    max-width: 500px;
-    width:100%;
+    /* max-width: 500px;
+    width: 100%; */
+    height: 250px;
 }

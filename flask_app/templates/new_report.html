@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,24 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="{{url_for ('static', filename='/js/file_upload.js')}}" defer></script>
+
     <title>File a New Report</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+
+<body style="background-color: #143658;">
     <div class="container-fluid bg-body-secondary">
         <nav class="navbar mb-3 py-0">
             <div class="container d-flex justify-content-between px-3">
                 <div class="pb-1">
-                    <h1 class="navbar-brand text-danger-emphasis pb-0" >Report Lists</h1>
-                    <a class="text-decoration-none text-reset" href="/user/{{session['current_login']}}">Welcome {{session.get('first_name')}}!</a>
+                    <h1 class="navbar-brand text-danger-emphasis pb-0">Report Lists</h1>
+                    <a class="text-decoration-none text-reset" href="/user/{{session['current_login']}}">Welcome
+                        {{session.get('first_name')}}!</a>
                 </div>
                 <nav class="nav nav-underline justify-content-end align-items-center" id="navbarNavAltMarkup">
                     <a class="nav-link" href="{{ url_for('show_all_reports') }}">All Reports</a>
-                    <a href="#" class="nav-link active" aria-current="page" >Add a Report</a>
-                    <a href="/user/logout" class="btn btn-outline-warning">Logout</a>
+                    <a href="#" class="nav-link active" aria-current="page">Add a Report</a>
+                    <a href="/user/logout" class="btn btn-danger">Logout</a>
                 </nav>
             </div>
         </nav>
@@ -33,52 +38,56 @@
             <div class="card-body">
                 <form action="/add_report" enctype="multipart/form-data" method="POST">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="location" id="location" value="{{pre_fill['location']}}" placeholder="">
+                        <input class="form-control" type="text" name="location" id="location"
+                            value="{{pre_fill['location']}}" placeholder="">
                         <label class="form-label" for="location">Location:</label>
                         {% with messages = get_flashed_messages(category_filter=['location']) %}
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                            {% endif %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="form-text text-danger ps-3">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
                         {% endwith %}
                     </div>
 
                     <div class="mb-3">
                         <div class="input-group">
                             <label class="input-group-text py-3" for="date">Date:</label>
-                            <input class="form-control" type="date" name="date" id="date" value="{{pre_fill['date']}}" placeholder="">
+                            <input class="form-control" type="date" name="date" id="date" value="{{pre_fill['date']}}"
+                                placeholder="">
                         </div>
                         {% with messages = get_flashed_messages(category_filter=['date']) %}
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                            {% endif %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="form-text text-danger ps-3">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
                         {% endwith %}
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="description" id="description" value="{{pre_fill['description']}}" placeholder="">
+                        <input class="form-control" type="text" name="description" id="description"
+                            value="{{pre_fill['description']}}" placeholder="">
                         <label class="form-label" for="description">Description:</label>
                         {% with messages = get_flashed_messages(category_filter=['description']) %}
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                            {% endif %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="form-text text-danger ps-3">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
                         {% endwith %}
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="offense" id="offense" value="{{pre_fill['offense']}}" placeholder="">
+                        <input class="form-control" type="text" name="offense" id="offense"
+                            value="{{pre_fill['offense']}}" placeholder="">
                         <label class="form-label" for="offense">Type of Offense:</label>
                         {% with messages = get_flashed_messages(category_filter=['offense']) %}
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="form-text text-danger ps-3">{{ message }}</div>
-                                {% endfor %}
-                            {% endif %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="form-text text-danger ps-3">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
                         {% endwith %}
                     </div>
 
@@ -110,4 +119,5 @@
         </div>
     </div>
 </body>
+
 </html>
