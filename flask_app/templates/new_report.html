@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{{url_for ('static', filename='/css/style.css')}}">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGfntbIqngtAaT0q34Us-H7WFp7hBR_HU&loading=async&libraries=places&callback=initAutocomplete"></script>
     <script src="{{url_for ('static', filename='/js/file_upload.js')}}" defer></script>
+
     <title>File a New Report</title>
 </head>
 
@@ -50,6 +52,7 @@
                                 {% endfor %}
                             {% endif %}
                         {% endwith %}
+                        
                     </div>
 
                     <div class="mb-3">
@@ -121,5 +124,18 @@
         </div>
     </div>
 </body>
+
+<script>
+    let autocomplete
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('location'), {
+                types: ['street_address'],
+                componentRestrictions: {'country' : ['US']},
+                fields: ['name']
+            }
+        )
+    }
+</script>
 
 </html>
