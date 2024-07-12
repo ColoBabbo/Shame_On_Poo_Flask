@@ -11,7 +11,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGfntbIqngtAaT0q34Us-H7WFp7hBR_HU&loading=async&libraries=places&callback=initAutocomplete"></script>
     <script src="{{url_for ('static', filename='/js/file_upload.js')}}" defer></script>
-
+    <script src="{{url_for ('static', filename='/js/autocomplete.js')}}" defer></script>
     <title>File a New Report</title>
 </head>
 
@@ -124,18 +124,4 @@
         </div>
     </div>
 </body>
-
-<script>
-    let autocomplete
-    function initAutocomplete() {
-        autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('location'), {
-                types: ['street_address'],
-                componentRestrictions: {'country' : ['US']},
-                fields: ['name']
-            }
-        )
-    }
-</script>
-
 </html>
