@@ -46,12 +46,6 @@
                         
                     </div>
 
-                    
-                        <label>
-                            Google Address:
-                            <input type="text" id="autocomplete">
-                        </label>
-
                     <div class="mb-3">
                         <div class="input-group">
                             <label class="input-group-text py-3" for="date">Date:</label>
@@ -115,7 +109,7 @@
     let autocomplete
     function initAutocomplete() {
         autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete'), {
+            document.getElementById('location'), {
                 types: ['street_address'],
                 componentRestrictions: {'country' : ['US']},
                 fields: ['name']
