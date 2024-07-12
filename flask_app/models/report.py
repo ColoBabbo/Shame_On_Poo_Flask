@@ -1,6 +1,11 @@
 from flask import flash, session
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import user
+import os, sys, requests, re
+from PIL import Image
+from io import BytesIO
+from pathlib import Path
+from urllib.parse import urlparse, unquote
 
 class Report:
     db = 'shame_on_poo_schema'
@@ -18,6 +23,25 @@ class Report:
 
     def __repr__(self) -> str:
         return f'Report: {self.id} | Offense: {self.offense} | Date: {self.date}\nImg: {self.img_file} | Cleaned: {self.is_cleaned}'
+
+    @classmethod
+    def url_cleaner(cls, url):
+        urlparse(url).path
+        url_parsed = urlparse(url)
+        file_path = unquote(Path(re.sub( r"\s+", '_', unquote(url_parsed.path))).name)
+        final_path = str(file_path).replace(os.sep, '/')
+        return final_path
+
+    @classmethod
+    def save_url_to_static_images(cls, form_data):
+        if not form_data.get('img_file'):
+            return ''
+        response = requests.get(form_data['img_file'])
+        response.raise_for_status()
+        this_image = Image.open(BytesIO(response.content))
+        this_image_file_name = cls.url_cleaner(form_data['img_file'])
+        this_image.save(f'flask_app/static/images/{this_image_file_name}')
+        return this_image_file_name
 
     @classmethod
     def get_one_json(cls, report_id:int) -> object:

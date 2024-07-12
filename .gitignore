@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,python,flask
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,python,flask
 
+# MySQLConnection #
+flask_app/config/mysqlconnection.py
+
 ### Flask ###
 instance/*
 !instance/.gitignore
