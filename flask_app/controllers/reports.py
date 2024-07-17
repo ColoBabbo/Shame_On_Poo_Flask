@@ -33,18 +33,7 @@ def show_one_report(report_id:int):
         if this_report == False:
             flash('No such record!', 'unauthorized')
             return redirect(url_for('show_all_reports'))
-        elif this_report.user.id != session.get('current_login'):
-            flash("That's not yours!", 'unauthorized')
-            return redirect(url_for('show_all_reports'))
-        if session.get('list_attempt'):
-            pre_fill = {
-                'list_name': session['list_attempt']['list_name'],
-            }
-        else:
-            pre_fill = {
-                'list_name': '',
-            }
-        return render_template('show_one_report.html', this_report = this_report, pre_fill = pre_fill)
+        return render_template('show_one_report.html', this_report = this_report)   #, pre_fill = pre_fill)
     else:
         flash('Please Login', 'login')
     return redirect('/')

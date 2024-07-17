@@ -74,10 +74,18 @@
                             <p class="mb-0"><strong>Has it been cleaned?</strong></p>
                             <p class="mb-0">{{'Yes!' if this_report.is_cleaned else 'No'}}</p>
                         </div>
+                        <div class="mb-2 d-flex gap-3 align-items-center">
+                            <p class="mb-0"><strong>Posted By:</strong></p>
+                            <p class="mb-0">
+                                {{'You' if this_report.user_id == session['current_login'] else this_report.user.first_name+' '+this_report.user.last_name}}
+                            </p>
+                        </div>
                     </div>
                     <div class="mb-2">
-                        <a href="{{url_for('edit_report', report_id = this_report.id)}}" class="mb-2 d-block btn btn-outline-secondary py-0 px-2">Edit Report</a>
-                        <a href="{{url_for('delete_report', report_id = this_report.id)}}" class="btn btn-outline-danger py-0 px-2">Delete Report</a>
+                        {% if this_report.user_id == session['current_login'] %}
+                            <a href="{{url_for('edit_report', report_id = this_report.id)}}" class="mb-2 d-block btn btn-outline-secondary py-0 px-2">Edit Report</a>
+                            <a href="{{url_for('delete_report', report_id = this_report.id)}}" class="btn btn-outline-danger py-0 px-2">Delete Report</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="mb-3">

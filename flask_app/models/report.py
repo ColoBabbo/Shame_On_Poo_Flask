@@ -57,10 +57,10 @@ class Report:
     def get_all(cls) -> list:
         query = """
                 SELECT * FROM reports
-                LEFT JOIN users ON reports.user_id = users.id
-                WHERE users.id = %(user_id)s;
+                LEFT JOIN users ON reports.user_id = users.id;
         """
-        results = connectToMySQL(cls.db).query_db(query, {'user_id' : session.get('current_login')})
+                # WHERE users.id = %(user_id)s;
+        results = connectToMySQL(cls.db).query_db(query) #, {'user_id' : session.get('current_login')})
         all_reports = []
         for report in results:
             this_report = cls(report)
