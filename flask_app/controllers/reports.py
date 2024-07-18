@@ -33,18 +33,7 @@ def show_one_report(report_id:int):
         if this_report == False:
             flash('No such record!', 'unauthorized')
             return redirect(url_for('show_all_reports'))
-        elif this_report.user.id != session.get('current_login'):
-            flash("That's not yours!", 'unauthorized')
-            return redirect(url_for('show_all_reports'))
-        if session.get('list_attempt'):
-            pre_fill = {
-                'list_name': session['list_attempt']['list_name'],
-            }
-        else:
-            pre_fill = {
-                'list_name': '',
-            }
-        return render_template('show_one_report.html', this_report = this_report, pre_fill = pre_fill)
+        return render_template('show_one_report.html', this_report = this_report)
     else:
         flash('Please Login', 'login')
     return redirect('/')
@@ -61,8 +50,8 @@ def show_all_reports():
 @app.route('/add_report', methods=["GET", "POST"])
 def add_report() -> None:
     if session.get('logged_in'):
-        if session.get('item_attempt'):
-            session.pop('item_attempt')
+        # if session.get('item_attempt'):
+        #     session.pop('item_attempt')
         if request.method == "GET":
             if session.get('report_attempt'):
                 pre_fill = {
@@ -94,7 +83,7 @@ def add_report() -> None:
                     'description': request.form['description'],
                     'offense': request.form['offense'],
                     'img_file': img_filename,
-                    'user_id': request.form['user_id'],
+                    'user_id': session['current_login'],
                 }
                 new_report = report.Report.insert_one(data)
                 if session.get('report_attempt'):
@@ -109,8 +98,8 @@ def add_report() -> None:
 @app.get('/report/<int:report_id>/delete')
 def delete_report(report_id:int) -> None:
     if session.get('logged_in'):
-        if session.get('item_attempt'):
-            session.pop('item_attempt')
+        # if session.get('item_attempt'):
+        #     session.pop('item_attempt')
         this_report = report.Report.get_one(report_id)
         if not this_report:
             flash('No such record!', 'unauthorized')
@@ -123,6 +112,12 @@ def delete_report(report_id:int) -> None:
     else:
         flash('Please Login', 'login')
     return redirect('/')
+
+# FUTURE: ~ Andrew
+# Add SQL IF to validate user owns the report
+# Break route into GET and POST routes
+# use request.form to rerender template on POST route if validation fails
+# pre-populate inputs with request.form or database data instead of using session
 
 @app.route('/report/<int:report_id>/edit', methods=["GET", "POST"])
 def edit_report(report_id:int) -> None:
@@ -156,7 +151,7 @@ def edit_report(report_id:int) -> None:
             return render_template('edit_report.html', pre_fill = pre_fill, report_id = report_id)
         elif request.method == "POST":
             if report.Report.is_legit_report(request.form):
-                updated_report = report.Report.update_one(request.form)
+                updated_report = report.Report.update_one(request.form, report_id)
                 if session.get('edit_attempt'):
                     session.pop('edit_attempt')
                 return redirect(url_for('show_one_report', report_id = report_id))

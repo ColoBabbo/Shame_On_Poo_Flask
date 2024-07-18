@@ -7,6 +7,9 @@ from io import BytesIO
 from pathlib import Path
 from urllib.parse import urlparse, unquote
 
+# Rename methods with descriptive names
+# ORGANIZE - classify methods by CRUD, helpers 
+
 class Report:
     db = 'shame_on_poo_schema'
 
@@ -111,14 +114,14 @@ class Report:
             return False
 
     @classmethod
-    def update_one(cls, form_dict:dict) -> None:
+    def update_one(cls, form_dict:dict, report_id:int) -> None:
         query = """
                 UPDATE reports
                 SET location = %(location)s, date = %(date)s, description = %(description)s, offense = %(offense)s, is_cleaned = %(is_cleaned)s, img_file = %(img_file)s
                 WHERE id = %(id)s;
         """
         data = {
-            'id': form_dict['id'],
+            'id': report_id,
             'location': form_dict['location'],
             'date': form_dict['date'],
             'description': form_dict['description'],

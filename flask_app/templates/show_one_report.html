@@ -52,24 +52,30 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="">
                         <div class="mb-2 d-flex gap-3 align-items-center">
-                            <p class="mb-0"><strong>Location:</strong></p>
+                            <p class="mb-0"><b>Location:</b></p>
                             <p class="mb-0">{{this_report.location}}</p>
                         </div>
                         <div class="mb-2 d-flex gap-3">
-                            <p class="mb-0"><strong>Date:</strong></p>
+                            <p class="mb-0"><b>Date:</b></p>
                             <p class="mb-0">{{this_report.date.strftime('%B %d, %Y')}}</p>
                         </div>
                         <div class="mb-2 d-flex gap-3 align-items-center">
-                            <p class="mb-0"><strong>Offense:</strong></p>
+                            <p class="mb-0"><b>Offense:</b></p>
                             <p class="mb-0">{{this_report.offense}}</p>
                         </div>
                         <div class="mb-2 d-flex gap-3 align-items-center">
-                            <p class="mb-0"><strong>Description:</strong></p>
+                            <p class="mb-0"><b>Description:</b></p>
                             <p class="mb-0">{{this_report.description}}</p>
                         </div>
                         <div class="mb-2 d-flex gap-3 align-items-center">
-                            <p class="mb-0"><strong>Has it been cleaned?</strong></p>
+                            <p class="mb-0"><b>Has it been cleaned?</b></p>
                             <p class="mb-0">{{'Yes!' if this_report.is_cleaned else 'No'}}</p>
+                        </div>
+                        <div class="mb-2 d-flex gap-3 align-items-center">
+                            <p class="mb-0"><b>Posted By:</b></p>
+                            <p class="mb-0">
+                                {{'You' if this_report.user_id == session['current_login'] else this_report.user.first_name+' '+this_report.user.last_name}}
+                            </p>
                         </div>
                     </div>
                     <div class="mb-2">
